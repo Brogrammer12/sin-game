@@ -21,9 +21,16 @@ public class titleScreen {
     public boolean newGameConfirmation=false;
     public int classSelected=0;
     public BufferedImage Continue, back, play, exit;
+    dialogueOptions dOptions, dOptions2;
+    timer timer1;
+    timer timer2;
     public titleScreen(gamepanel gp) {
         this.gp=gp;
         loadImages();
+        dOptions=new dialogueOptions(new String[] {"Yes", "No"});
+        dOptions2=new dialogueOptions(new String[] {"Yes","No"});
+        timer1=new timer();
+        timer2=new timer();
     }
     public void loadImages() {
         try {
@@ -224,7 +231,57 @@ if (gp.listener.keyCodes[KeyEvent.VK_ENTER]==true && gp.listener.hasPressed==fal
                 }
                 gp.listener.hasPressed=true;
             }
-
+            if (gp.listener.keyCodes[KeyEvent.VK_ENTER]==true && gp.listener.hasPressed==false) {
+                titleState="Ready";
+                gp.listener.hasPressed=true;
+            }
+        }
+        else if(titleState=="Ready") {
+            dOptions.dialogueWithOption(g2, gp.wordBoi, "Are you ready to fight?", gamepanel.GAME_WIDTH/2, gamepanel.GAME_HEIGHT/2, scaleX, scaleY);
+            if (gp.listener.mouseClicked==true && gp.listener.mouseRect.intersects(dOptions.getRectangle(0)) && gp.listener.hasPressed==false) {
+                titleState="uSure";
+                gp.listener.hasPressed=true;
+            }
+            if (gp.listener.mouseClicked==true && gp.listener.mouseRect.intersects(dOptions.getRectangle(1)) && gp.listener.hasPressed==false) {
+                titleState="hellnaw";
+                gp.listener.hasPressed=true;
+            }
+        }
+        else if(titleState=="uSure") {
+            dOptions2.dialogueWithOption(g2, gp.wordBoi, "Are you prepared for what lies ahead?", gamepanel.GAME_WIDTH/2, gamepanel.GAME_HEIGHT/2, scaleX, scaleY);
+            if (gp.listener.mouseClicked==true && gp.listener.mouseRect.intersects(dOptions2.getRectangle(0)) && gp.listener.hasPressed==false) {
+                titleState="willingTo";
+                gp.listener.hasPressed=true;
+            }
+            if (gp.listener.mouseClicked==true && gp.listener.mouseRect.intersects(dOptions2.getRectangle(1)) && gp.listener.hasPressed==false) {
+                titleState="hellnaw";
+                gp.listener.hasPressed=true;
+            }
+        }
+        else if(titleState=="hellnaw") {
+            FontMetrics fm=g2.getFontMetrics();
+            int width=fm.stringWidth("THEN GET OUT.");
+            gp.wordBoi.drawAll((gamepanel.GAME_WIDTH/2)-width/2, gamepanel.GAME_HEIGHT/2, "THEN GET OUT.", g2);
+            boolean timerDone=timer1.wait(3, gp.delta);
+            if (timerDone==true) {
+                titleState="menu";
+            }
+        }
+        else if(titleState=="willingTo") {
+            FontMetrics fm=g2.getFontMetrics();
+            int width=fm.stringWidth("Are you willing to- #$^*@1");
+            g2.setColor(Color.WHITE);
+            gp.wordBoi.drawAll((gamepanel.GAME_WIDTH/2)-width/2, gamepanel.GAME_HEIGHT/2, "Are you willing to- #$^*@1", g2);
+            boolean timerDone=timer2.wait(1.5, gp.delta);
+            if (timerDone==true) {
+                titleState="gate";
+            }
+        }
+        else if(titleState=="gate") {
+             FontMetrics fm=g2.getFontMetrics();
+            int width=fm.stringWidth("In that case, the way is open.");
+            g2.setColor(Color.WHITE);
+            gp.wordBoi.drawAll((gamepanel.GAME_WIDTH/2)-width/2, gamepanel.GAME_HEIGHT/2, "In that case, the way is open.", g2);
         }
     }
 }

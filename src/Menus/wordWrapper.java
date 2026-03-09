@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import Main.gamepanel;
 
 public class wordWrapper {
+    //draws animated text to the screen. Pretty neat, right? I yoinked it from a different game
     public int wordStage=0;
     public int charat=0;
     public String previousText;
@@ -29,6 +30,9 @@ public class wordWrapper {
             if (x+fm.stringWidth(text[wordStage])>=gamepanel.GAME_WIDTH) {
                 x=100;
                 y+=fm.getHeight();
+            }
+            if (x<0) {
+                x=0;
             }
             }
             if (charat<E.length-1) {
