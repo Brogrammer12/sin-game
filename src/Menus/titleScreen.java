@@ -22,8 +22,10 @@ public class titleScreen {
     public int classSelected=0;
     public BufferedImage Continue, back, play, exit;
     dialogueOptions dOptions, dOptions2;
+    public fadeWhite fWhite;
     timer timer1;
     timer timer2;
+    timer timer3;
     public titleScreen(gamepanel gp) {
         this.gp=gp;
         loadImages();
@@ -31,6 +33,8 @@ public class titleScreen {
         dOptions2=new dialogueOptions(new String[] {"Yes","No"});
         timer1=new timer();
         timer2=new timer();
+        timer3=new timer();
+        fWhite=new fadeWhite(gp);
     }
     public void loadImages() {
         try {
@@ -282,6 +286,22 @@ if (gp.listener.keyCodes[KeyEvent.VK_ENTER]==true && gp.listener.hasPressed==fal
             int width=fm.stringWidth("In that case, the way is open.");
             g2.setColor(Color.WHITE);
             gp.wordBoi.drawAll((gamepanel.GAME_WIDTH/2)-width/2, gamepanel.GAME_HEIGHT/2, "In that case, the way is open.", g2);
+            boolean time=timer3.wait(2, gp.delta);
+            if (time==true) {
+                int fadeCode=fWhite.fadeToWhite(2, g2);
+                if (fadeCode==0) {
+                    System.out.println("starting fade");
+                }
+                else if(fadeCode==1) {
+                    System.out.println("fade in progress");
+                }
+                else if(fadeCode==2) {
+                    System.out.println("ending fade");
+                }
+                else if(fadeCode==3) {
+                    System.out.println("fade finished");
+                }
+            }
         }
     }
 }
