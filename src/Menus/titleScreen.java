@@ -294,12 +294,14 @@ if (gp.listener.keyCodes[KeyEvent.VK_ENTER]==true && gp.listener.hasPressed==fal
                 }
                 else if(fadeCode==1) {
                     System.out.println("fade in progress");
+                    gp.gameProcess=true;
                 }
                 else if(fadeCode==2) {
                     System.out.println("ending fade");
                 }
                 else if(fadeCode==3) {
                     System.out.println("fade finished");
+                    titleState="runningGame";
                 }
             }
         }

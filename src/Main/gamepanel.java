@@ -1,6 +1,7 @@
 package Main;
 import javax.swing.JPanel;
 
+import Cutscenes.cutsceneManager;
 import Menus.textDrawer;
 import Menus.titleScreen;
 import Menus.wordWrapper;
@@ -21,12 +22,16 @@ public static final int ogTileSize=16;
     public int screenHeight=resTileSize*maxScreenVert;
     public static final int GAME_WIDTH=960;
     public static final int GAME_HEIGHT=576;
+    public boolean gameProcess=false;
+    public String currentCutscene="meteorScene";
     public float delta=0f;
 public double lastTime;
 public inputListener listener=new inputListener();
 public titleScreen title=new titleScreen(this);
 public textDrawer tDrawer=new textDrawer();
 public wordWrapper wordBoi=new wordWrapper();
+public cutsceneManager cManager=new cutsceneManager(this);
+public gameProcessor gProcessor=new gameProcessor(this);
 public gamepanel() {
     this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -83,6 +88,7 @@ public void startGame() {
         drawGame(g2, scaleX, scaleY);
     }
     public void drawGame(Graphics2D g2, double scaleX, double scaleY) {
+        gProcessor.runGame(g2);
         title.drawTitleScreen(g2, scaleX, scaleY);
     }
 }

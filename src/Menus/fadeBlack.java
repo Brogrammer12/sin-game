@@ -13,7 +13,7 @@ public class fadeBlack {
 public fadeBlack(gamepanel gp) {
 this.gp=gp;
 }
-// 1 means currently fully white, 0 means starting fade and 1 means fade ended
+// 1 means currently fully black, 0 means starting fade and 1 means fade ended
    public int fadeToBlack(double duration, Graphics2D g2) {
     if (startFadeDone==false) {
       startFade(g2);
@@ -36,7 +36,7 @@ this.gp=gp;
       g2.setComposite(AlphaComposite.getInstance(
                 AlphaComposite.SRC_OVER, alpha
         ));
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, gamepanel.GAME_WIDTH, gamepanel.GAME_HEIGHT);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
       return 1;
@@ -55,7 +55,7 @@ this.gp=gp;
          g2.setComposite(AlphaComposite.getInstance(
                 AlphaComposite.SRC_OVER, alpha
         ));
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, gamepanel.GAME_WIDTH, gamepanel.GAME_HEIGHT);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
       }
@@ -74,7 +74,7 @@ this.gp=gp;
          g2.setComposite(AlphaComposite.getInstance(
                 AlphaComposite.SRC_OVER, alpha
         ));
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, gamepanel.GAME_WIDTH, gamepanel.GAME_HEIGHT);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
       }
