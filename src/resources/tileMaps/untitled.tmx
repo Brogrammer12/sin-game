@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="19" height="11" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="18">
+ <tileset firstgid="1" source="../../../sinAssets.tsx"/>
+ <tileset firstgid="6" source="../../../props.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="19" height="11">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,
+3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,
+3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,
+3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,
+3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,
+3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,
+3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,
+3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,
+3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,2,
+4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="12" gid="6" x="185.886" y="62.1201" width="77" height="39"/>
+  <object id="13" gid="7" x="50.6042" y="79.4064" width="26" height="48"/>
+  <object id="14" gid="8" x="136.954" y="176.329" width="29" height="13"/>
+  <object id="15" gid="9" x="58.3251" y="176.046" width="36" height="13"/>
+  <object id="16" gid="10" x="291.081" y="105.283" width="12.477" height="39.9541"/>
+  <object id="17" gid="11" x="133.954" y="57.7951" width="34" height="23"/>
+ </objectgroup>
+</map>

@@ -9,7 +9,7 @@ public class gameProcessor {
         this.gp=gp;
     }
     public void runGame(Graphics2D g2) {
-        if (gp.gameProcess==true) {
+        if (gp.state==gameState.CUTSCENE) {
             gp.cManager.startCutscene(gp.currentCutscene, g2);
         }
     }

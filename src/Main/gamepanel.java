@@ -2,9 +2,11 @@ package Main;
 import javax.swing.JPanel;
 
 import Cutscenes.cutsceneManager;
+import Entities.Player;
 import Menus.textDrawer;
 import Menus.titleScreen;
 import Menus.wordWrapper;
+import tileLoader.tileManager;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,9 +24,14 @@ public static final int ogTileSize=16;
     public int screenHeight=resTileSize*maxScreenVert;
     public static final int GAME_WIDTH=960;
     public static final int GAME_HEIGHT=576;
+    public int maxWorldHoriz=19;
+    public int maxWorldVert=11;
+    public int worldWidth=maxWorldHoriz*resTileSize;
+    public int worldHeight=maxWorldVert*resTileSize;
     public boolean gameProcess=false;
     public String currentCutscene="meteorScene";
     public float delta=0f;
+    public gameState state=gameState.TITLE_SCREEN;
 public double lastTime;
 public inputListener listener=new inputListener();
 public titleScreen title=new titleScreen(this);
@@ -32,6 +39,8 @@ public textDrawer tDrawer=new textDrawer();
 public wordWrapper wordBoi=new wordWrapper();
 public cutsceneManager cManager=new cutsceneManager(this);
 public gameProcessor gProcessor=new gameProcessor(this);
+public Player p1=new Player(this);
+public tileManager tManager=new tileManager(this);
 public gamepanel() {
     this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -88,7 +97,15 @@ public void startGame() {
         drawGame(g2, scaleX, scaleY);
     }
     public void drawGame(Graphics2D g2, double scaleX, double scaleY) {
-        gProcessor.runGame(g2);
-        title.drawTitleScreen(g2, scaleX, scaleY);
+        //gProcessor.runGame(g2);
+        if (state==gameState.GAMEPLAY) {
+            tManager.draw(g2);
+        }
+        if (state==gameState.TITLE_SCREEN) {
+            title.drawTitleScreen(g2, scaleX, scaleY);
+        }
+        if (state==gameState.CUTSCENE) {
+            cManager.startCutscene(currentCutscene, g2);
+        }
     }
 }

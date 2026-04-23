@@ -13,13 +13,17 @@ public class cutsceneManager {
         this.gp=gp;
         cutscenes.put("meteorScene", new meteorScene(gp));
         cutscenes.put("meteorFell", new meteorFell(gp));
+        cutscenes.put("crystal_extracted", new crystal_extracted(gp));
+        cutscenes.put("evilBoi", new evilBoi(gp));
+        cutscenes.put("Village", new village(gp));
+        cutscenes.put("final_message", new final_message(gp));
     }
     public void startCutscene(String cutsceneId, Graphics2D g2) {
         cutsceneSuperclass boi=cutscenes.get(cutsceneId);
         boi.runCutscene(g2);
     }
-    public void early_cutscene(String cutsceneId, Graphics2D g2) {
+    public void early_cutscene(String cutsceneId, Graphics2D g2, int WIDTH, int HEIGHT) {
         cutsceneSuperclass boi=cutscenes.get(cutsceneId);
-        g2.drawImage(boi.cutsceneImage, 0, 0, gamepanel.GAME_WIDTH, gamepanel.GAME_HEIGHT, null);
+        g2.drawImage(boi.cutsceneImage, 0, 0, WIDTH, HEIGHT, null);
     }
 }

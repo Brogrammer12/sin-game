@@ -41,10 +41,10 @@ public class meteorFell extends cutsceneSuperclass{
             gp.wordBoi.drawAll(10, height, "There was some type of special crystal inside of the meteor.", g2);
             if (wut==true) {
                 if (fCode>=1) {
-                //gp.cManager.early_cutscene("researchLab", g2);
+                gp.cManager.early_cutscene("crystal_extracted", g2, gamepanel.GAME_WIDTH, gamepanel.GAME_HEIGHT);
             }
             if (fCode==3) {
-                //gp.currentCutscene="researchLab";
+                gp.currentCutscene="crystal_extracted";
             }
                 int fadeCode=fBlack.fadeToBlack(0.5, g2);
             fCode=fadeCode;

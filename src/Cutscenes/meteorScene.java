@@ -120,7 +120,7 @@ public class meteorScene extends cutsceneSuperclass{
         boolean done=timer2.wait(0.75, gp.delta);
         if (done==true) {
             if (fCode>=1) {
-                gp.cManager.early_cutscene("meteorFell", g2);
+                gp.cManager.early_cutscene("meteorFell", g2, gamepanel.GAME_WIDTH, gamepanel.GAME_HEIGHT);
             }
             if (fCode==3) {
                 gp.currentCutscene="meteorFell";

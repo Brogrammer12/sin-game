@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import Main.gameState;
 import Main.gamepanel;
 
 public class titleScreen {
@@ -295,6 +296,7 @@ if (gp.listener.keyCodes[KeyEvent.VK_ENTER]==true && gp.listener.hasPressed==fal
                 else if(fadeCode==1) {
                     System.out.println("fade in progress");
                     gp.gameProcess=true;
+                    gp.state=gameState.CUTSCENE;
                 }
                 else if(fadeCode==2) {
                     System.out.println("ending fade");
