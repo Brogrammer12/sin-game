@@ -15,6 +15,7 @@ public class Player {
     public BufferedImage up1, up2, down1, down2, right1, right2, left1, left2;
     public int spriteCounter=0;
     public int screenX, screenY;
+    boolean position_instantiated=false;
     public int spriteNum=1;
     gamepanel gp;
     public Player(gamepanel gp) {
@@ -23,6 +24,7 @@ public class Player {
         screenX=gamepanel.GAME_WIDTH/2;
         screenY=gamepanel.GAME_HEIGHT/2;
         worldY=gp.worldHeight/2;
+        loadImages();
     }
     public void loadImages() {
         try {
@@ -40,8 +42,11 @@ public class Player {
         }
     }
     public void update() {
-        worldX=gp.worldWidth/2;
+        if (position_instantiated==false) {
+            worldX=gp.worldWidth/2;
         worldY=gp.worldHeight/2;
+        position_instantiated=true;
+        }
         if (gp.listener.keyCodes[KeyEvent.VK_W]==true) {
             direction="up";
             worldY-=speed;
@@ -58,8 +63,9 @@ public class Player {
             direction="right";
             worldX+=speed;
         }
-        spriteCounter++;
-        if (spriteCounter>=25) {
+        if (gp.listener.keyCodes[KeyEvent.VK_W]==true || gp.listener.keyCodes[KeyEvent.VK_A]==true || gp.listener.keyCodes[KeyEvent.VK_S]==true || gp.listener.keyCodes[KeyEvent.VK_D]==true) {
+            spriteCounter++;
+        if (spriteCounter>=15) {
             if (spriteNum==1) {
                 spriteNum=2;
             }
@@ -68,6 +74,11 @@ public class Player {
             }
             spriteCounter=0;
         }
+        }
+    }
+
+    public void load_Player_UI(Graphics2D g2) {
+        //
     }
     public void draw(Graphics2D g2) {
         BufferedImage image=null;
@@ -105,5 +116,6 @@ public class Player {
                 }
                 break;
         }
+        g2.drawImage(image, screenX, screenY, gamepanel.resTileSize, gamepanel.resTileSize, null);
     }
 }
