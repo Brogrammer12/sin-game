@@ -2,44 +2,43 @@ package tileLoader;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
 import Main.gamepanel;
+import netscape.javascript.JSException;
 
 public class tileManager {
     gamepanel gp;
     public tile[] tile;
     public tileSuperclass mapTileNum[][];
-    public String realFile="C:\\Users\\NewAdmin\\Documents\\sin game\\src\\resources\\tileMaps\\start_room.tmj";
+    public boolean shouldCamMove=true;
+    public String realFile="C:\\Users\\NewAdmin\\Documents\\sin game\\src\\resources\\tileMaps\\start.tmj";
+    public String currentTileset="";
     public tileManager(gamepanel gp) {
         this.gp=gp;
+        tile=new tile[11];
         newMap(realFile);
-        tile=new tile[5];
-        tileLoader();
     }
-    public void tileLoader() {
+    public void tileLoader(JsonNode ts, int firstgid) {
+        JsonNode tiles=ts.get("tiles");
+        for (JsonNode boi:tiles) {
+            String imageName="/resources"+boi.get("image").asText();
+        int id=boi.get("id").asInt();
         try {
-            tile[4]=new tile();
-            tile[4].image=ImageIO.read(getClass().getResourceAsStream("/resources/tiles/wooden_Floor.png"));
-            tile[3]=new tile();
-            tile[3].image=ImageIO.read(getClass().getResourceAsStream("/resources/tiles/wallBunkerUp.png"));
-            tile[3].collision=true;
-            tile[1]=new tile();
-            tile[1].image=ImageIO.read(getClass().getResourceAsStream("/resources/tiles/wallBunkerLeft.png"));
-            tile[1].collision=true;
-            tile[0]=new tile();
-            tile[0].image=ImageIO.read(getClass().getResourceAsStream("/resources/tiles/wallBunkerDown.png"));
-            tile[0].collision=true;
-            tile[2]=new tile();
-            tile[2].image=ImageIO.read(getClass().getResourceAsStream("/resources/tiles/wallBunkerRight.png"));
-            tile[2].collision=true;
+            BufferedImage tilesetImage=ImageIO.read(getClass().getResourceAsStream(imageName));
+            tile[id-1+firstgid]=new tile();
+            tile[id-1+firstgid].image=tilesetImage;
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }
         }
     }
     public void newMap(String fileName) {
@@ -49,6 +48,20 @@ public class tileManager {
             JsonNode dataNode=root.get("layers").get(0).get("data");
             JsonNode heightNode=root.get("layers").get(0).get("height");
             JsonNode widthNode=root.get("layers").get(0).get("width");
+            JsonNode wut=root.get("properties");
+            for (JsonNode custom:wut) {
+                if (custom.get("name").asText().equals("camShouldMove")) {
+                    shouldCamMove=custom.get("value").asBoolean();
+                }
+            }
+            JsonNode tilesets=root.get("tilesets");
+            for (JsonNode t:tilesets) {
+                String tilePath="C:/Users/NewAdmin/Documents/sin game/src/resources"+t.get("source").asText();
+                int gid=t.get("firstgid").asInt();
+                JsonNode root3=mapper.readTree(new File(tilePath));
+                tileLoader(root3, gid);
+            }
+        
             int[] data=mapper.readValue(dataNode.toString(), int[].class);
             int height=Integer.parseInt(heightNode.toString());
             int width=Integer.parseInt(widthNode.toString());
@@ -75,8 +88,8 @@ public class tileManager {
             int tileNum=mapTileNum[col] [row].tileNum;
             int worldX=col*gamepanel.resTileSize;
             int worldY=row*gamepanel.resTileSize;
-            int screenX=(int) (worldX-gp.p1.worldX+gp.p1.screenX);
-            int screenY=(int) (worldY-gp.p1.worldY+gp.p1.screenY);
+            int screenX=(int) (worldX-gp.p1.worldX+gamepanel.GAME_WIDTH/2);
+            int screenY=(int) (worldY-gp.p1.worldY+gamepanel.GAME_HEIGHT/2);
             g2.drawImage(tile[tileNum].image, screenX, screenY, gamepanel.resTileSize, gamepanel.resTileSize, null);
             col++;
             if (col==gp.maxWorldHoriz) {

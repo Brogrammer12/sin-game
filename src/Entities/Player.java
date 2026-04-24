@@ -49,19 +49,39 @@ public class Player {
         }
         if (gp.listener.keyCodes[KeyEvent.VK_W]==true) {
             direction="up";
-            worldY-=speed;
+            if (gp.tManager.shouldCamMove==true) {
+                worldY-=speed;
+            }
+            else {
+                screenY-=speed;
+            }
         }
         else if (gp.listener.keyCodes[KeyEvent.VK_A]==true) {
             direction="left";
-            worldX-=speed;
+            if (gp.tManager.shouldCamMove==true) {
+                worldX-=speed;
+            }
+            else {
+                screenX-=speed;
+            }
         }
         else if (gp.listener.keyCodes[KeyEvent.VK_S]==true) {
             direction="down";
-            worldY+=speed;
+            if (gp.tManager.shouldCamMove==true) {
+                worldY+=speed;
+            }
+            else {
+                screenY+=speed;
+            }
         }
         else if (gp.listener.keyCodes[KeyEvent.VK_D]==true) {
             direction="right";
-            worldX+=speed;
+            if (gp.tManager.shouldCamMove==true) {
+                worldX+=speed;
+            }
+            else {
+                screenX+=speed;
+            }
         }
         if (gp.listener.keyCodes[KeyEvent.VK_W]==true || gp.listener.keyCodes[KeyEvent.VK_A]==true || gp.listener.keyCodes[KeyEvent.VK_S]==true || gp.listener.keyCodes[KeyEvent.VK_D]==true) {
             spriteCounter++;

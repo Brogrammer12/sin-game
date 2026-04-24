@@ -84,7 +84,9 @@ public void startGame() {
         }
     }
     public void update() {
-
+        if (state==gameState.GAMEPLAY) {
+            p1.update();
+        }
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -100,6 +102,7 @@ public void startGame() {
         //gProcessor.runGame(g2);
         if (state==gameState.GAMEPLAY) {
             tManager.draw(g2);
+            p1.draw(g2);
         }
         if (state==gameState.TITLE_SCREEN) {
             title.drawTitleScreen(g2, scaleX, scaleY);

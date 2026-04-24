@@ -14,7 +14,7 @@
  "tiles":[
         {
          "id":0,
-         "image":"wallBunkerDown.png",
+         "image":"\/tiles\/wallBunkerDown.png",
          "imageheight":16,
          "imagewidth":16,
          "properties":[
@@ -26,7 +26,7 @@
         }, 
         {
          "id":1,
-         "image":"wallBunkerLeft.png",
+         "image":"\/tiles\/wallBunkerLeft.png",
          "imageheight":16,
          "imagewidth":16,
          "properties":[
@@ -38,7 +38,7 @@
         }, 
         {
          "id":2,
-         "image":"wallBunkerRight.png",
+         "image":"\/tiles\/wallBunkerRight.png",
          "imageheight":16,
          "imagewidth":16,
          "properties":[
@@ -50,7 +50,7 @@
         }, 
         {
          "id":3,
-         "image":"wallBunkerUp.png",
+         "image":"\/tiles\/wallBunkerUp.png",
          "imageheight":16,
          "imagewidth":16,
          "properties":[
@@ -62,7 +62,7 @@
         }, 
         {
          "id":4,
-         "image":"wooden_Floor.png",
+         "image":"\/tiles\/wooden_Floor.png",
          "imageheight":16,
          "imagewidth":16,
          "properties":[
