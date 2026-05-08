@@ -1,0 +1,211 @@
+Alright Ian — now we’re going to **surgically integrate interactable props into *your actual code*** without blowing up your architecture.
+
+You don’t need to rewrite your whole engine.  
+You only need **three small additions**:
+
+1. A `Prop` base class that *can* implement interfaces  
+2. An `Interactable` interface  
+3. A factory step in your Tiled loader that creates the *correct* prop subclass based on Tiled properties
+
+Let’s walk through this cleanly and directly in the context of your posted code.
+
+---
+
+# ✅ **STEP 1 — Fix your `props` class so it can support behavior**
+
+Right now your `props` class is probably just:
+
+```java
+public class props {
+    public BufferedImage image;
+    public int x, y, width, height;
+}
+```
+
+You need to turn this into a **base class**:
+
+```java
+public class Prop {
+    public BufferedImage image;
+    public int x, y, width, height;
+
+    // Optional: override in subclasses
+    public void onInteract(gamepanel gp) {}
+}
+```
+
+This gives every prop a place where behavior *can* go.
+
+---
+
+# ✅ **STEP 2 — Create the Interactable interface**
+
+```java
+public interface Interactable {
+    void onInteract(gamepanel gp);
+}
+```
+
+This is the “ability” that props can choose to have.
+
+---
+
+# ✅ **STEP 3 — Create subclasses for props that DO things**
+
+Example: a chest.
+
+```java
+public class ChestProp extends Prop implements Interactable {
+
+    private String loot;
+
+    public ChestProp(String loot) {
+        this.loot = loot;
+    }
+
+    @Override
+    public void onInteract(gamepanel gp) {
+        System.out.println("Chest opened! Loot: " + loot);
+        // give loot to player here
+    }
+}
+```
+
+Example: a door.
+
+```java
+public class DoorProp extends Prop implements Interactable {
+
+    private String targetMap;
+
+    public DoorProp(String targetMap) {
+        this.targetMap = targetMap;
+    }
+
+    @Override
+    public void onInteract(gamepanel gp) {
+        gp.loadMap(targetMap);
+    }
+}
+```
+
+---
+
+# ✅ **STEP 4 — Modify your Tiled loader to CREATE THE RIGHT PROP CLASS**
+
+This is the part you’re missing.
+
+Right now you do:
+
+```java
+prop[id] = new props();
+prop[id].image = tilesetImage;
+```
+
+You need to replace that with a **factory** that checks Tiled properties.
+
+### In Tiled, add custom properties to each object:
+Example chest object:
+```
+type: chest
+loot: sword,shield
+```
+
+Example door object:
+```
+type: door
+targetMap: dungeon_entrance
+```
+
+### Then modify your loader:
+
+Inside your object layer loop:
+
+```java
+String type = e.get("type").asText(); // Tiled object type
+JsonNode properties = e.get("properties");
+
+Prop p;
+
+switch (type) {
+    case "chest" -> {
+        String loot = getProperty(properties, "loot");
+        p = new ChestProp(loot);
+    }
+    case "door" -> {
+        String target = getProperty(properties, "targetMap");
+        p = new DoorProp(target);
+    }
+    default -> {
+        p = new Prop(); // generic prop
+    }
+}
+
+p.x = e.get("x").asInt();
+p.y = e.get("y").asInt();
+p.width = e.get("width").asInt();
+p.height = e.get("height").asInt();
+p.image = tilesetImage;
+
+prop[index] = p;
+```
+
+Helper:
+
+```java
+private String getProperty(JsonNode props, String name) {
+    for (JsonNode p : props) {
+        if (p.get("name").asText().equals(name)) {
+            return p.get("value").asText();
+        }
+    }
+    return null;
+}
+```
+
+---
+
+# ✅ **STEP 5 — Interaction code becomes trivial**
+
+Wherever you check for interaction:
+
+```java
+Prop p = prop[i];
+
+if (p instanceof Interactable interactable) {
+    interactable.onInteract(gp);
+}
+```
+
+Done.
+
+---
+
+# 🎉 **RESULT: You solved your scaling problem**
+
+### Before:
+- Every chest behaves the same  
+- Every door behaves the same  
+- You’d need 100 functions for 100 props  
+- No way to customize per-instance behavior  
+
+### After:
+- One ChestProp class  
+- One DoorProp class  
+- Unlimited unique chests/doors via Tiled properties  
+- Behavior is data-driven  
+- No code duplication  
+- No giant switch statements  
+- No runtime interface hacks  
+
+This is exactly how professional engines work.
+
+---
+
+# If you want, I can:
+- Rewrite your `props` class properly  
+- Write a clean PropFactory class  
+- Show you how to add custom properties in Tiled  
+- Help you build a component system later (Unity-style)  
+
+Just tell me what you want next.

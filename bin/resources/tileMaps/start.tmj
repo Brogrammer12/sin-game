@@ -31,21 +31,33 @@
          "objects":[
                 {
                  "gid":6,
-                 "height":39,
+                 "height":26.5618,
                  "id":12,
-                 "name":"",
+                 "name":"Table",
+                 "properties":[
+                        {
+                         "name":"functionField",
+                         "type":"string",
+                         "value":""
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":77,
-                 "x":185.886,
-                 "y":62.1201
+                 "width":46.47,
+                 "x":216.699,
+                 "y":47.9858
                 }, 
                 {
                  "gid":7,
                  "height":48,
                  "id":13,
-                 "name":"",
+                 "name":"Bed",
+                 "properties":[
+                        {
+                         "name":"functionField",
+                         "type":"string",
+                         "value":""
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -57,19 +69,31 @@
                  "gid":8,
                  "height":13,
                  "id":14,
-                 "name":"",
+                 "name":"Exit",
+                 "properties":[
+                        {
+                         "name":"functionField",
+                         "type":"string",
+                         "value":""
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":29,
-                 "x":136.954,
-                 "y":176.329
+                 "x":137.519,
+                 "y":176.046
                 }, 
                 {
                  "gid":9,
                  "height":13,
                  "id":15,
-                 "name":"",
+                 "name":"Windows",
+                 "properties":[
+                        {
+                         "name":"functionField",
+                         "type":"string",
+                         "value":""
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -81,7 +105,13 @@
                  "gid":10,
                  "height":39.9541,
                  "id":16,
-                 "name":"",
+                 "name":"Curtains",
+                 "properties":[
+                        {
+                         "name":"functionField",
+                         "type":"string",
+                         "value":""
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -91,15 +121,21 @@
                 }, 
                 {
                  "gid":11,
-                 "height":23,
+                 "height":15.6502,
                  "id":17,
-                 "name":"",
+                 "name":"Chest",
+                 "properties":[
+                        {
+                         "name":"functionField",
+                         "type":"string",
+                         "value":""
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":34,
-                 "x":133.954,
-                 "y":57.7951
+                 "width":21.2792,
+                 "x":189.36,
+                 "y":47.3357
                 }],
          "opacity":1,
          "type":"objectgroup",

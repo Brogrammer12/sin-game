@@ -7,6 +7,12 @@
     },
  "margin":0,
  "name":"sinAssets",
+ "properties":[
+        {
+         "name":"object",
+         "type":"bool",
+         "value":false
+        }],
  "spacing":0,
  "tilecount":5,
  "tiledversion":"1.11.2",

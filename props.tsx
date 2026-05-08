@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.10" tiledversion="1.11.2" name="props" tilewidth="77" tileheight="49" tilecount="6" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
+ <properties>
+  <property name="object" type="bool" value="true"/>
+ </properties>
  <tile id="0">
   <image source="src/resources/props/table.png" width="77" height="39"/>
  </tile>

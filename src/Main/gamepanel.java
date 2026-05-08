@@ -41,6 +41,7 @@ public cutsceneManager cManager=new cutsceneManager(this);
 public gameProcessor gProcessor=new gameProcessor(this);
 public Player p1=new Player(this);
 public tileManager tManager=new tileManager(this);
+public collisionChecker cChecker=new collisionChecker();
 public gamepanel() {
     this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -102,7 +103,7 @@ public void startGame() {
         //gProcessor.runGame(g2);
         if (state==gameState.GAMEPLAY) {
             tManager.draw(g2);
-            p1.draw(g2);
+            p1.draw(g2, scaleX, scaleY);
         }
         if (state==gameState.TITLE_SCREEN) {
             title.drawTitleScreen(g2, scaleX, scaleY);
