@@ -24,10 +24,14 @@ public class tileManager {
     public boolean shouldCamMove=true;
     public String realFile="C:\\Users\\NewAdmin\\Documents\\sin game\\src\\resources\\tileMaps\\start.tmj";
     public String currentTileset="";
+    public BufferedImage[] propImages;
+    public boolean[] collisions;
     public tileManager(gamepanel gp) {
         this.gp=gp;
         tile=new tile[11];
         prop=new props[11];
+        propImages=new BufferedImage[11];
+        collisions=new boolean[11];
         newMap(realFile);
     }
     public void tileLoader(JsonNode ts, int firstgid, JsonNode mapRoot) {
@@ -61,9 +65,19 @@ public class tileManager {
             }
             }
             else {
-                JsonNode layer1=mapRoot.get("layers").get(1).get("imageName");
-                prop[id]=new props();
-                prop[id].image=tilesetImage;
+                System.out.println("wut");
+                propImages[id]=tilesetImage;
+                JsonNode propProperty=boi.get("properties");
+                for (JsonNode sixseven:propProperty) {
+                    if (sixseven.get("name").asText().equals("collision") && sixseven.get("value").asBoolean()==true) {
+                        collisions[id]=true;
+                        System.out.println("detected collision boi");
+                    }
+                    else {
+                        collisions[id]=false;
+                        System.out.println("didnt detect shet. :(");
+                    }
+                }
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -102,8 +116,13 @@ public class tileManager {
             gp.worldHeight=gp.maxWorldVert*gamepanel.resTileSize;
             for (int row=0; row<height; row++) {
                 for (int col=0; col<width; col++) {
-                    mapTileNum[col] [row]=new tileSuperclass();
+                    if (data[row*width+col]==0) {
+                        continue;
+                    }
+                    else {
+                         mapTileNum[col] [row]=new tileSuperclass();
                     mapTileNum[col] [row].tileNum=data[row*width+col]-1;
+                    }
                 }
             }
             ObjectMapper mapper2=new ObjectMapper();
@@ -112,10 +131,23 @@ public class tileManager {
             JsonNode thingie=root2.get("layers").get(1).get("objects");
         int index=0;
         for (JsonNode e:thingie) {
+            String type=e.get("name").asText();
+            String functionField=e.get("properties").get(0).get("value").asText();
+            switch (type) {
+                case "Chest":
+                    prop[index]=new Chest(gp, functionField);
+                    break;
+            
+                default:
+                    prop[index]=new props();
+                    break;
+            }
            prop[index].x=e.get("x").asInt();
            prop[index].y=e.get("y").asInt();
            prop[index].width=e.get("width").asInt();
            prop[index].height=e.get("height").asInt();
+           prop[index].image=propImages[index];
+           prop[index].collision=collisions[index];
             index++;
         }
             //System.exit(0);
@@ -145,7 +177,15 @@ public class tileManager {
         int col=0;
         int row=0;
         while (col<gp.maxWorldHoriz && row<gp.maxWorldVert) {
-            int tileNum=mapTileNum[col] [row].tileNum;
+            if (mapTileNum[col] [row]==null) {
+                col++;
+            if (col==gp.maxWorldHoriz) {
+                col=0;
+                row++;
+            }
+            continue;
+            }
+                int tileNum=mapTileNum[col] [row].tileNum;
             int worldX=col*gamepanel.resTileSize;
             int worldY=row*gamepanel.resTileSize;
             int screenX;
@@ -168,6 +208,7 @@ public class tileManager {
                 col=0;
                 row++;
             }
+            
         }
         drawObjectLayer(g2);
     }

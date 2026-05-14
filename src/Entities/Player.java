@@ -1,6 +1,8 @@
 package Entities;
 
 import Main.gamepanel;
+import tileLoader.Interactable;
+
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -43,6 +45,17 @@ public class Player extends entitySuperclass{
     }
     public void update() {
         playerHitbox=new Rectangle(8, 16, 32, 32);
+        for (int i = 0; i < gp.tManager.prop.length; i++) {
+    if (gp.tManager.prop[i]!=null) {
+        Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3)-10, ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3)-10, gp.tManager.prop[i].width*3+10, gp.tManager.prop[i].height*3+20);
+        Rectangle playerCopy=new Rectangle(playerHitbox.x+worldX, playerHitbox.y+worldY, playerHitbox.width, playerHitbox.height);
+         if (playerCopy.intersects(propRect)) {
+        if (gp.tManager.prop[i] instanceof Interactable interactable) {
+                    interactable.onInteract(gp);
+                }
+    }
+    }
+    }
         if (position_instantiated==false) {
             worldX=gp.worldWidth/2;
         worldY=gp.worldHeight/2;
@@ -61,8 +74,14 @@ public class Player extends entitySuperclass{
             boolean colliding=false;
             for (int i=0; i<gp.tManager.prop.length; i++) {
                 if (gp.tManager.prop[i]!=null) {
+                    boolean propcollision=gp.tManager.prop[i].collision;
                     Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3), ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3), gp.tManager.prop[i].width*3, gp.tManager.prop[i].height*3);
-                colliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
+                    if (propcollision==true) {
+                        colliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
+                    }
+                    else {
+                        colliding=gp.cChecker.checkTileCollision(this, gp);
+                    }
                 if (colliding==true) {
                     break;
                 }
@@ -78,8 +97,14 @@ public class Player extends entitySuperclass{
             boolean isColliding=false;
             for (int i=0; i<gp.tManager.prop.length; i++) {
                 if (gp.tManager.prop[i]!=null) {
+                    boolean propcollision=gp.tManager.prop[i].collision;
                     Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3), ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3),gp.tManager.prop[i].width*3, gp.tManager.prop[i].height*3);
-                isColliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
+                if (propcollision==true) {
+                        isColliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
+                    }
+                    else {
+                        isColliding=gp.cChecker.checkTileCollision(this, gp);
+                    }
                 if (isColliding==true) {
                     break;
                 }
@@ -95,8 +120,14 @@ public class Player extends entitySuperclass{
             boolean isColliding=false;
             for (int i=0; i<gp.tManager.prop.length; i++) {
                 if (gp.tManager.prop[i]!=null) {
+                    boolean propcollision=gp.tManager.prop[i].collision;
                     Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3), ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3), gp.tManager.prop[i].width*3, gp.tManager.prop[i].height*3);
-                isColliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
+                if (propcollision==true) {
+                        isColliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
+                    }
+                    else {
+                        isColliding=gp.cChecker.checkTileCollision(this, gp);
+                    }
                 if (isColliding==true) {
                     break;
                 }
@@ -112,8 +143,14 @@ public class Player extends entitySuperclass{
             boolean isColliding=false;
             for (int i=0; i<gp.tManager.prop.length; i++) {
                 if (gp.tManager.prop[i]!=null) {
+                    boolean propcollision=gp.tManager.prop[i].collision;
                     Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3), ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3),gp.tManager.prop[i].width*3,gp.tManager.prop[i].height*3);
-                isColliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
+                if (propcollision==true) {
+                        isColliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
+                    }
+                    else {
+                        isColliding=gp.cChecker.checkTileCollision(this, gp);
+                    }
                 if (isColliding==true) {
                     break;
                 }

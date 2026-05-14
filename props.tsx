@@ -5,21 +5,39 @@
   <property name="object" type="bool" value="true"/>
  </properties>
  <tile id="0">
+  <properties>
+   <property name="collision" type="bool" value="true"/>
+  </properties>
   <image source="src/resources/props/table.png" width="77" height="39"/>
  </tile>
  <tile id="1">
+  <properties>
+   <property name="collision" type="bool" value="true"/>
+  </properties>
   <image source="src/resources/props/bed.png" width="26" height="48"/>
  </tile>
  <tile id="2">
+  <properties>
+   <property name="collision" type="bool" value="false"/>
+  </properties>
   <image source="src/resources/props/exit_backwards.png" width="29" height="13"/>
  </tile>
  <tile id="3">
+  <properties>
+   <property name="collision" type="bool" value="false"/>
+  </properties>
   <image source="src/resources/props/window.png" width="36" height="13"/>
  </tile>
  <tile id="4">
+  <properties>
+   <property name="collision" type="bool" value="false"/>
+  </properties>
   <image source="src/resources/props/curtains.png" width="17" height="49"/>
  </tile>
  <tile id="5">
+  <properties>
+   <property name="collision" type="bool" value="true"/>
+  </properties>
   <image source="src/resources/props/chest.png" width="34" height="23"/>
  </tile>
 </tileset>
