@@ -44,122 +44,31 @@ public class Player extends entitySuperclass{
         }
     }
     public void update() {
-        playerHitbox=new Rectangle(8, 16, 32, 32);
-        for (int i = 0; i < gp.tManager.prop.length; i++) {
-    if (gp.tManager.prop[i]!=null) {
-        Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3)-10, ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3)-10, gp.tManager.prop[i].width*3+10, gp.tManager.prop[i].height*3+20);
-        Rectangle playerCopy=new Rectangle(playerHitbox.x+worldX, playerHitbox.y+worldY, playerHitbox.width, playerHitbox.height);
-         if (playerCopy.intersects(propRect)) {
-        if (gp.tManager.prop[i] instanceof Interactable interactable) {
-                    interactable.onInteract(gp);
-                }
+        handleInteractions();
+        instantiatePosition();
+        handleMovementComplete();
     }
+
+    public void load_Player_UI(Graphics2D g2) {
+        //
     }
-    }
-        if (position_instantiated==false) {
-            worldX=gp.worldWidth/2;
-        worldY=gp.worldHeight/2;
-        position_instantiated=true;
-        }
-        if (gp.tManager.shouldCamMove==false) {
-            screenX=worldX+gp.tManager.cameraX;
-            screenY=worldY+gp.tManager.cameraY;
-        }
-        else {
-            screenX=gamepanel.GAME_WIDTH/2;
-        screenY=gamepanel.GAME_HEIGHT/2;
-        }
+
+    public void handleMovementComplete() {
         if (gp.listener.keyCodes[KeyEvent.VK_W]==true) {
             direction="up";
-            boolean colliding=false;
-            for (int i=0; i<gp.tManager.prop.length; i++) {
-                if (gp.tManager.prop[i]!=null) {
-                    boolean propcollision=gp.tManager.prop[i].collision;
-                    Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3), ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3), gp.tManager.prop[i].width*3, gp.tManager.prop[i].height*3);
-                    if (propcollision==true) {
-                        colliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
-                    }
-                    else {
-                        colliding=gp.cChecker.checkTileCollision(this, gp);
-                    }
-                if (colliding==true) {
-                    break;
-                }
-                }
-            }
-            if (colliding==false) {
-                worldY-=speed;
-            
-                }
+            tryMove(0, -speed);
         }
         else if (gp.listener.keyCodes[KeyEvent.VK_A]==true) {
             direction="left";
-            boolean isColliding=false;
-            for (int i=0; i<gp.tManager.prop.length; i++) {
-                if (gp.tManager.prop[i]!=null) {
-                    boolean propcollision=gp.tManager.prop[i].collision;
-                    Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3), ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3),gp.tManager.prop[i].width*3, gp.tManager.prop[i].height*3);
-                if (propcollision==true) {
-                        isColliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
-                    }
-                    else {
-                        isColliding=gp.cChecker.checkTileCollision(this, gp);
-                    }
-                if (isColliding==true) {
-                    break;
-                }
-                }
-            }
-            if (isColliding==false) {
-                worldX-=speed;
-
-                }
+            tryMove(-speed, 0);
         }
         else if (gp.listener.keyCodes[KeyEvent.VK_S]==true) {
             direction="down";
-            boolean isColliding=false;
-            for (int i=0; i<gp.tManager.prop.length; i++) {
-                if (gp.tManager.prop[i]!=null) {
-                    boolean propcollision=gp.tManager.prop[i].collision;
-                    Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3), ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3), gp.tManager.prop[i].width*3, gp.tManager.prop[i].height*3);
-                if (propcollision==true) {
-                        isColliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
-                    }
-                    else {
-                        isColliding=gp.cChecker.checkTileCollision(this, gp);
-                    }
-                if (isColliding==true) {
-                    break;
-                }
-                }
-            }
-            if (isColliding==false) {
-                worldY+=speed;
-            
-                }
+            tryMove(0, speed);
         }
         else if (gp.listener.keyCodes[KeyEvent.VK_D]==true) {
             direction="right";
-            boolean isColliding=false;
-            for (int i=0; i<gp.tManager.prop.length; i++) {
-                if (gp.tManager.prop[i]!=null) {
-                    boolean propcollision=gp.tManager.prop[i].collision;
-                    Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3), ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3),gp.tManager.prop[i].width*3,gp.tManager.prop[i].height*3);
-                if (propcollision==true) {
-                        isColliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
-                    }
-                    else {
-                        isColliding=gp.cChecker.checkTileCollision(this, gp);
-                    }
-                if (isColliding==true) {
-                    break;
-                }
-                }
-            }
-            if (isColliding==false) {
-                worldX+=speed;
-            
-                }
+            tryMove(speed, 0);
         }
         if (gp.listener.keyCodes[KeyEvent.VK_W]==true || gp.listener.keyCodes[KeyEvent.VK_A]==true || gp.listener.keyCodes[KeyEvent.VK_S]==true || gp.listener.keyCodes[KeyEvent.VK_D]==true) {
             spriteCounter++;
@@ -174,9 +83,62 @@ public class Player extends entitySuperclass{
         }
         }
     }
-
-    public void load_Player_UI(Graphics2D g2) {
-        //
+    public void instantiatePosition() {
+        if (position_instantiated==false) {
+            worldX=gp.worldWidth/2;
+        worldY=gp.worldHeight/2;
+        position_instantiated=true;
+        }
+        if (gp.tManager.shouldCamMove==false) {
+            screenX=worldX+gp.tManager.cameraX;
+            screenY=worldY+gp.tManager.cameraY;
+        }
+        else {
+            screenX=gamepanel.GAME_WIDTH/2;
+        screenY=gamepanel.GAME_HEIGHT/2;
+        }
+    }
+public void handleInteractions() {
+    playerHitbox=new Rectangle(8, 16, 32, 32);
+        for (int i = 0; i < gp.tManager.prop.length; i++) {
+    if (gp.tManager.prop[i]!=null) {
+        Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3)-10, ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3)-10, gp.tManager.prop[i].width*3+10, gp.tManager.prop[i].height*3+20);
+        Rectangle playerCopy=new Rectangle(playerHitbox.x+worldX, playerHitbox.y+worldY, playerHitbox.width, playerHitbox.height);
+         if (playerCopy.intersects(propRect)) {
+        if (gp.tManager.prop[i] instanceof Interactable interactable) {
+                    interactable.onInteract(gp);
+                }
+    }
+    }
+    }
+}
+    public void tryMove(int dx, int dy) {
+        boolean isColliding=false;
+        boolean propsExist=false;
+            for (int i=0; i<gp.tManager.prop.length; i++) {
+                if (gp.tManager.prop[i]!=null) {
+                    propsExist=true;
+                    boolean propcollision=gp.tManager.prop[i].collision;
+                    Rectangle propRect=new Rectangle((gp.tManager.prop[i].x*3), ((gp.tManager.prop[i].y-gp.tManager.prop[i].height)*3),gp.tManager.prop[i].width*3,gp.tManager.prop[i].height*3);
+                if (propcollision==true) {
+                        isColliding=gp.cChecker.checkPropCollision(this, propRect, direction) || gp.cChecker.checkTileCollision(this, gp);
+                    }
+                    else {
+                        isColliding=gp.cChecker.checkTileCollision(this, gp);
+                    }
+                if (isColliding==true) {
+                    break;
+                }
+                }
+            }
+            if (propsExist==false) {
+                isColliding=gp.cChecker.checkTileCollision(this, gp);
+            }
+            if (isColliding==false) {
+                worldX+=dx;
+                worldY+=dy;
+            
+                }
     }
     public void draw(Graphics2D g2, double scaleX, double scaleY) {
         BufferedImage image=null;

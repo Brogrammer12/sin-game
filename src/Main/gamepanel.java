@@ -6,6 +6,7 @@ import Entities.Player;
 import Menus.textDrawer;
 import Menus.titleScreen;
 import Menus.wordWrapper;
+import tileLoader.mapRegister;
 import tileLoader.tileManager;
 
 import java.awt.Color;
@@ -40,6 +41,7 @@ public wordWrapper wordBoi=new wordWrapper();
 public cutsceneManager cManager=new cutsceneManager(this);
 public gameProcessor gProcessor=new gameProcessor(this);
 public Player p1=new Player(this);
+public mapRegister mRegister=new mapRegister(this);
 public tileManager tManager=new tileManager(this);
 public collisionChecker cChecker=new collisionChecker();
 public gamepanel() {

@@ -4,4 +4,5 @@ public class tile {
     public boolean collision=false;
     public boolean destructible=false;
     public BufferedImage image;
+    public String bannedEntrances;
 }
