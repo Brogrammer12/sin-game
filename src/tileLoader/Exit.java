@@ -1,13 +1,17 @@
 package tileLoader;
 
+import java.awt.Graphics2D;
+
 import Main.gamepanel;
 
 public class Exit extends props implements Interactable{
 String targetMapInfo;
 gamepanel gp;
-    public Exit(gamepanel gp, String targetMapInfo) {
+String name;
+    public Exit(gamepanel gp, String targetMapInfo, String name) {
         this.gp=gp;
         this.targetMapInfo=targetMapInfo;
+        this.name=name;
     }
     @Override
     public void onInteract(gamepanel gp) {

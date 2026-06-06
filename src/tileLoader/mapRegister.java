@@ -133,23 +133,25 @@ public class mapRegister {
         int index=0;
         mapProps=new props[100];
             for (JsonNode e:thingie) {
-            String type=e.get("name").asText();
+            String type=e.get("type").asText();
+            String name=e.get("name").asText();
             String functionField=null;
             try {
                 functionField=e.get("properties").get(0).get("value").asText();
             }
             catch (Exception en) {
-                en.getStackTrace();
+                en.printStackTrace();
             }
             
             int gid=e.get("gid").asInt();
-            mapProps[index]=objectFactory.create(type, gp, functionField);
+            mapProps[index]=objectFactory.create(type, gp, functionField, name);
            mapProps[index].x=e.get("x").asInt();
            mapProps[index].y=e.get("y").asInt();
            mapProps[index].width=e.get("width").asInt();
            mapProps[index].height=e.get("height").asInt();
            mapProps[index].image=prop[gid].image;
            mapProps[index].collision=prop[gid].collision;
+           mapProps[index].applySavedState();
             index++;
         }
             //System.exit(0);

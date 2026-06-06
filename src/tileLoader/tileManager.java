@@ -63,7 +63,8 @@ public class tileManager {
                     screenX = prop[i].x*3+cameraX;
                 screenY = (prop[i].y-prop[i].height)*3+cameraY; 
                 }
-                g2.drawImage(prop[i].image, screenX, screenY, prop[i].width*3, prop[i].height*3, null);
+                prop[i].draw(g2, screenX, screenY, prop[i].width*3, prop[i].height*3);
+                //g2.drawImage(prop[i].image, screenX, screenY, prop[i].width*3, prop[i].height*3, null);
             }
         }
         

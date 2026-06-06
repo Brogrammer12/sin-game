@@ -33,15 +33,15 @@
                  "gid":6,
                  "height":26.5618,
                  "id":12,
-                 "name":"Table",
+                 "name":"table_1",
                  "properties":[
                         {
                          "name":"functionField",
                          "type":"string",
-                         "value":""
+                         "value":"You look at your notes...Looks like I should talk with the village Elder./.../I guess I've been sleeping for a while. Alright, lets go find out what's happening."
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"Table",
                  "visible":true,
                  "width":46.47,
                  "x":216.699,
@@ -51,7 +51,7 @@
                  "gid":7,
                  "height":48,
                  "id":13,
-                 "name":"Bed",
+                 "name":"",
                  "properties":[
                         {
                          "name":"functionField",
@@ -69,15 +69,15 @@
                  "gid":8,
                  "height":13,
                  "id":14,
-                 "name":"Exit",
+                 "name":"exit_3",
                  "properties":[
                         {
                          "name":"functionField",
                          "type":"string",
-                         "value":"C:\\Users\\NewAdmin\\Documents\\sin_game\\src\\resources\\tileMaps\\spawnArea.tmj 1000 10"
+                         "value":"C:\\Users\\NewAdmin\\Documents\\sin_game\\src\\resources\\tileMaps\\spawnArea.tmj 1300 400"
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"Exit",
                  "visible":true,
                  "width":29,
                  "x":137.519,
@@ -87,7 +87,7 @@
                  "gid":9,
                  "height":13,
                  "id":15,
-                 "name":"Windows",
+                 "name":"",
                  "properties":[
                         {
                          "name":"functionField",
@@ -105,7 +105,7 @@
                  "gid":10,
                  "height":39.9541,
                  "id":16,
-                 "name":"Curtains",
+                 "name":"",
                  "properties":[
                         {
                          "name":"functionField",
@@ -123,7 +123,7 @@
                  "gid":11,
                  "height":15.6502,
                  "id":17,
-                 "name":"Chest",
+                 "name":"chest_1",
                  "properties":[
                         {
                          "name":"functionField",
@@ -131,7 +131,7 @@
                          "value":""
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"Chest",
                  "visible":true,
                  "width":21.2792,
                  "x":189.36,

@@ -16,6 +16,7 @@ public class Player extends entitySuperclass{
     public int screenX, screenY;
     public double SCALEX, SCALEY;
     boolean position_instantiated=false;
+    public boolean movementDisabled=false;
     public int spriteNum=1;
     gamepanel gp;
     public Player(gamepanel gp) {
@@ -52,7 +53,12 @@ public class Player extends entitySuperclass{
     public void load_Player_UI(Graphics2D g2) {
         //
     }
-
+    public void disableMovement() {
+        movementDisabled=true;
+    }
+    public void enableMovement() {
+        movementDisabled=false;
+    }
     public void handleMovementComplete() {
         if (gp.listener.keyCodes[KeyEvent.VK_W]==true) {
             direction="up";
@@ -113,7 +119,8 @@ public void handleInteractions() {
     }
 }
     public void tryMove(int dx, int dy) {
-        boolean isColliding=false;
+        if (movementDisabled==false) {
+            boolean isColliding=false;
         boolean propsExist=false;
             for (int i=0; i<gp.tManager.prop.length; i++) {
                 if (gp.tManager.prop[i]!=null) {
@@ -139,6 +146,7 @@ public void handleInteractions() {
                 worldY+=dy;
             
                 }
+        }
     }
     public void draw(Graphics2D g2, double scaleX, double scaleY) {
         BufferedImage image=null;

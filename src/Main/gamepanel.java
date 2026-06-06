@@ -6,6 +6,7 @@ import Entities.Player;
 import Menus.textDrawer;
 import Menus.titleScreen;
 import Menus.wordWrapper;
+import tileLoader.WorldState;
 import tileLoader.mapRegister;
 import tileLoader.tileManager;
 
@@ -34,6 +35,7 @@ public static final int ogTileSize=16;
     public float delta=0f;
     public gameState state=gameState.TITLE_SCREEN;
 public double lastTime;
+public WorldState wState=new WorldState();
 public inputListener listener=new inputListener();
 public titleScreen title=new titleScreen(this);
 public textDrawer tDrawer=new textDrawer();
