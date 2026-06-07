@@ -47,7 +47,8 @@ public class collisionChecker {
             int tileNum1,tileNum2;
             switch (entity.direction) {
                 case "up":
-                entityTopRow=(entityTopWorldY-entity.speed)/gamepanel.resTileSize;
+                    try {
+                        entityTopRow=(entityTopWorldY-entity.speed)/gamepanel.resTileSize;
                 if (gp.tManager.mapTileNum[entityLeftCol] [entityTopRow]!=null && gp.tManager.mapTileNum[entityRightCol] [entityTopRow]!=null) {
                     tileNum1=gp.tManager.mapTileNum[entityLeftCol] [entityTopRow].tileNum;
                 tileNum2=gp.tManager.mapTileNum[entityRightCol] [entityTopRow].tileNum;
@@ -58,9 +59,14 @@ public class collisionChecker {
                 else {
                     return false;
                 }
+            }
+            catch (ArrayIndexOutOfBoundsException e) {
+                return true;
+            }
                 break;
                 case "left":
-                entityLeftCol=(entityLeftWorldX-entity.speed)/gamepanel.resTileSize;
+                    try {
+                        entityLeftCol=(entityLeftWorldX-entity.speed)/gamepanel.resTileSize;
                 if (gp.tManager.mapTileNum[entityLeftCol] [entityTopRow]!=null && gp.tManager.mapTileNum[entityLeftCol] [entityBottomRow]!=null) {
                     tileNum1=gp.tManager.mapTileNum[entityLeftCol] [entityTopRow].tileNum;
                 tileNum2=gp.tManager.mapTileNum[entityLeftCol] [entityBottomRow].tileNum;
@@ -71,9 +77,14 @@ public class collisionChecker {
                 else {
                     return false;
                 }
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        return true;
+                    }
                 break;
                 case "down":
-                entityBottomRow=(entityBottomWorldY+entity.speed)/gamepanel.resTileSize;
+                    try {
+                        entityBottomRow=(entityBottomWorldY+entity.speed)/gamepanel.resTileSize;
                 if (gp.tManager.mapTileNum[entityLeftCol] [entityBottomRow]!=null && gp.tManager.mapTileNum[entityRightCol] [entityBottomRow]!=null) {
                     tileNum1=gp.tManager.mapTileNum[entityLeftCol] [entityBottomRow].tileNum;
                 tileNum2=gp.tManager.mapTileNum[entityRightCol] [entityBottomRow].tileNum;
@@ -84,9 +95,14 @@ public class collisionChecker {
                 else {
                     return false;
                 }
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        return true;
+                    }
                 break;
                 case "right":
-                entityRightCol=(entityRightWorldX+entity.speed)/gamepanel.resTileSize;
+                    try {
+                        entityRightCol=(entityRightWorldX+entity.speed)/gamepanel.resTileSize;
                 if (gp.tManager.mapTileNum[entityRightCol] [entityTopRow]!=null && gp.tManager.mapTileNum[entityRightCol] [entityBottomRow]!=null) {
                     tileNum1=gp.tManager.mapTileNum[entityRightCol] [entityTopRow].tileNum;
                 tileNum2=gp.tManager.mapTileNum[entityRightCol] [entityBottomRow].tileNum;
@@ -97,6 +113,10 @@ public class collisionChecker {
                 else {
                     return false;
                 }
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        return true;
+                    }
                 break;
             }
         return false;
