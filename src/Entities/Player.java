@@ -186,6 +186,24 @@ public void handleInteractions() {
                 }
                 break;
         }
-        g2.drawImage(image, screenX, screenY, gamepanel.resTileSize, gamepanel.resTileSize, null);
+        int x=screenX;
+        int y=screenY;
+        if (gp.tManager.shouldCamMove==true) {
+            if (screenX>worldX) {
+                x=worldX;
+            }
+            if (screenY>worldY) {
+                y=worldY;
+            }
+            int rightOffset=gp.screenWidth-screenX;
+            if (rightOffset>gp.tManager.mapWidth-worldX) {
+                x=gp.screenWidth-(gp.tManager.mapWidth-worldX);
+            }
+            int bottomOffset=gp.screenHeight-screenY;
+            if (bottomOffset>gp.tManager.mapHeight-worldY) {
+                y=gp.screenHeight-(gp.tManager.mapHeight-worldY);
+            }
+        }
+        g2.drawImage(image, x, y, gamepanel.resTileSize, gamepanel.resTileSize, null);
     }
 }

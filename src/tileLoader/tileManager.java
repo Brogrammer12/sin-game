@@ -57,7 +57,23 @@ public class tileManager {
                 int screenY; 
                 if (shouldCamMove==true) {
                     screenX = prop[i].x*3 - gp.p1.worldX + gamepanel.GAME_WIDTH / 2;
-                screenY = (prop[i].y-prop[i].height)*3 - gp.p1.worldY + gamepanel.GAME_HEIGHT / 2; 
+                screenY = (prop[i].y-prop[i].height)*3 - gp.p1.worldY + gamepanel.GAME_HEIGHT / 2;
+                int worldX=screenX+(gp.p1.worldX-gp.p1.screenX);
+                int worldY=screenY+(gp.p1.worldY-gp.p1.screenY);
+                if (gp.p1.screenX>gp.p1.worldX) {
+                screenX=worldX;
+            }
+            if (gp.p1.screenY>gp.p1.worldY) {
+                screenY=worldY;
+            }
+            int rightOffset=gp.screenWidth-gp.p1.screenX;
+            if (rightOffset>mapWidth-gp.p1.worldX) {
+                screenX=gp.screenWidth-(mapWidth-worldX);
+            }
+            int bottomOffset=gp.screenHeight-gp.p1.screenY;
+            if (bottomOffset>mapHeight-gp.p1.worldY) {
+                screenY=gp.screenHeight-(mapHeight-worldY);
+            }
                 }
                 else {
                     screenX = prop[i].x*3+cameraX;
@@ -89,6 +105,20 @@ public class tileManager {
             if (shouldCamMove==true) {
                 screenX=(int) (worldX-gp.p1.worldX+gamepanel.GAME_WIDTH/2);
             screenY=(int) (worldY-gp.p1.worldY+gamepanel.GAME_HEIGHT/2);
+            if (gp.p1.screenX>gp.p1.worldX) {
+                screenX=worldX;
+            }
+            if (gp.p1.screenY>gp.p1.worldY) {
+                screenY=worldY;
+            }
+            int rightOffset=gp.screenWidth-gp.p1.screenX;
+            if (rightOffset>mapWidth-gp.p1.worldX) {
+                screenX=gp.screenWidth-(mapWidth-worldX);
+            }
+            int bottomOffset=gp.screenHeight-gp.p1.screenY;
+            if (bottomOffset>mapHeight-gp.p1.worldY) {
+                screenY=gp.screenHeight-(mapHeight-worldY);
+            }
             }
             else {
                 screenX=(int) (worldX+cameraX);
