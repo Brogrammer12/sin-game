@@ -167,6 +167,7 @@ if (gp.listener.keyCodes[KeyEvent.VK_ENTER]==true && gp.listener.hasPressed==fal
             Rectangle backRect=new Rectangle(gp.tDrawer.scalex(scaleX, 190), gp.tDrawer.scaley(scaleY, 450-textHeight), gp.tDrawer.scalewidth(scaleX, backWidth), gp.tDrawer.scaleheight(scaleY, textHeight));
             if (gp.listener.mouseRect.intersects(contRect) && gp.listener.mouseClicked==true && gp.listener.hasPressed==false) {
                 titleState="classSelection";
+                gp.p1.Name=playerName;
                 gp.listener.hasPressed=true;
             }
             if (gp.listener.mouseRect.intersects(backRect) && gp.listener.mouseClicked==true && gp.listener.hasPressed==false) {
@@ -238,6 +239,7 @@ if (gp.listener.keyCodes[KeyEvent.VK_ENTER]==true && gp.listener.hasPressed==fal
             }
             if (gp.listener.keyCodes[KeyEvent.VK_ENTER]==true && gp.listener.hasPressed==false) {
                 titleState="Ready";
+                gp.p1.Class=Class;
                 gp.listener.hasPressed=true;
             }
         }

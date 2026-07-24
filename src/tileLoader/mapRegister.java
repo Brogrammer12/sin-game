@@ -140,7 +140,7 @@ public class mapRegister {
                 functionField=e.get("properties").get(0).get("value").asText();
             }
             catch (Exception en) {
-                en.printStackTrace();
+                
             }
             
             int gid=e.get("gid").asInt();

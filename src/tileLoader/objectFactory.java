@@ -11,6 +11,8 @@ public class objectFactory {
                         return new Exit(gp, data, name);
                         case "Table":
                             return new tableWithBook(gp, data, name);
+                            case "Cutscene":
+                                return new cutsceneTrigger(gp, data, name);
                 default:
                     return new props();
             }

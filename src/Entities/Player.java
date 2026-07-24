@@ -17,6 +17,8 @@ public class Player extends entitySuperclass{
     public double SCALEX, SCALEY;
     boolean position_instantiated=false;
     public boolean movementDisabled=false;
+    public String Name;
+    public String Class;
     public int spriteNum=1;
     gamepanel gp;
     public Player(gamepanel gp) {

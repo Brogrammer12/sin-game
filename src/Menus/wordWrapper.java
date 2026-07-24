@@ -11,7 +11,7 @@ public class wordWrapper {
     public int charat=0;
     public String previousText;
     public void drawAll(int x, int y, String dialogueText, Graphics2D g2) {
-        if (previousText!=dialogueText) {
+        if (!dialogueText.equals(previousText)) {
             charat=0;
             wordStage=0;
             previousText=dialogueText;

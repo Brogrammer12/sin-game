@@ -17,6 +17,7 @@ public class cutsceneManager {
         cutscenes.put("evilBoi", new evilBoi(gp));
         cutscenes.put("Village", new village(gp));
         cutscenes.put("final_message", new final_message(gp));
+        cutscenes.put("villageElder", new villageElder(gp));
     }
     public void startCutscene(String cutsceneId, Graphics2D g2) {
         cutsceneSuperclass boi=cutscenes.get(cutsceneId);
